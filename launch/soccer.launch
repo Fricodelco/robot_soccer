@@ -1,8 +1,0 @@
-<launch> 
-
-<node pkg="robot_vision" type="publisher_ball" name="ball_coordinates" respawn = true ns = "left_attack">
-<rosparam command="load" file="$(find robot_vision)/launch/soccer.yaml" />
-</node> 
-
-</launch>
-
