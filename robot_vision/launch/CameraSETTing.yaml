@@ -1,0 +1,12 @@
+CameraID: 1
+Bmax: 70
+Bmin: 0
+Gmax: 255
+Gmin: 180
+Rmax: 255
+Rmin: 130
+Width_image: 480
+Height_image: 360
+Limit_close_distance: 100
+Limit_mid_distance: 500
+ 
