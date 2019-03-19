@@ -6,10 +6,28 @@ import cv2
 import numpy as np
 from ball_param_msg.msg import ball_param
 
+<<<<<<< HEAD
+=======
+def read_param():
+	camera_id = rospy.get_param("CameraID")
+	maxb = rospy.get_param("Bmax")
+	maxg = rospy.get_param("Gmax")
+	maxr = rospy.get_param("Rmax")
+	minb = rospy.get_param("Bmin")
+	ming = rospy.get_param("Gmin")
+	minr = rospy.get_param("Rmin")
+	image_size_h = rospy.get_param("Width_image")
+	image_size_w = rospy.get_param("Height_image")
+
+	return camera_id, image_size_w, image_size_h, minb, ming, minr, maxb, maxg, maxr
+	
+            
+>>>>>>> 32ffeead7f782714fc715b0f4ce9b66228786980
 def publish():
 	try:
 		pub = rospy.Publisher('ball_state', ball_param, queue_size=20)
 		rospy.init_node('publisher_ball', anonymous=True)
+<<<<<<< HEAD
 
 		cam = cv2.VideoCapture(1)
 
@@ -18,6 +36,18 @@ def publish():
 		while True:
 			error, image_ball = cam.read()
 			image_ball = cv2.resize(image_ball, (480,320))
+=======
+		
+		camera_id, image_size_w, image_size_h, minb, ming, minr, maxb, maxg, maxr = read_param()
+		
+		cam = cv2.VideoCapture(camera_id)
+
+		print "Start" 
+		param_ball_msg = ball_param()
+		while not rospy.is_shutdown():
+			error, image_ball = cam.read()
+			image_ball = cv2.resize(image_ball, (image_size_h,image_size_w))
+>>>>>>> 32ffeead7f782714fc715b0f4ce9b66228786980
 
 			y_size = np.size(image_ball, 0)
 			x_size = np.size(image_ball, 1)
@@ -29,7 +59,11 @@ def publish():
 
 			hsv_image_ball = cv2.cvtColor(image_ball, cv2.COLOR_BGR2HSV)
 
+<<<<<<< HEAD
 			bin_image_ball = cv2.inRange(hsv_image_ball, (0, 180, 80), (70, 255, 255))
+=======
+			bin_image_ball = cv2.inRange(hsv_image_ball, (minb, ming, minr), (maxb, maxg, maxr))
+>>>>>>> 32ffeead7f782714fc715b0f4ce9b66228786980
 
 			bin_image_ball = cv2.erode(bin_image_ball,None,iterations=1)
 			bin_image_ball = cv2.erode(bin_image_ball,None,iterations=2)
@@ -37,19 +71,32 @@ def publish():
 			contours = cv2.findContours(bin_image_ball, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
 			
 			contours = contours[1]
+<<<<<<< HEAD
 			param_ball_msg = ball_param()
+=======
+			
+>>>>>>> 32ffeead7f782714fc715b0f4ce9b66228786980
 			x = 0
 			y = 0
 			radius = 0
 			if len(contours):
 				contours = sorted(contours, key=cv2.contourArea, reverse=True)
+<<<<<<< HEAD
 				cv2.drawContours(image_ball, contours, 0, (255, 0, 255), 3)
+=======
+				#cv2.drawContours(image_ball, contours, 0, (255, 0, 255), 3)
+>>>>>>> 32ffeead7f782714fc715b0f4ce9b66228786980
 
 				(x, y), radius = cv2.minEnclosingCircle(contours[0])
 				center = (int(x), int(y))
 				radius = int(radius)
+<<<<<<< HEAD
 				cv2.circle(image_ball, center, radius, (0, 255, 0), 2)
 				cv2.imshow("Circle", image_ball)
+=======
+				#cv2.circle(image_ball, center, radius, (0, 255, 0), 2)
+				#cv2.imshow("Circle", image_ball)
+>>>>>>> 32ffeead7f782714fc715b0f4ce9b66228786980
 				param_ball_msg.find_ball = True
 				param_ball_msg.x_centre = x - x_offset
 				param_ball_msg.y_centre = y_offset - y
@@ -59,8 +106,11 @@ def publish():
 			else :
 				param_ball_msg.find_ball = False
 				pub.publish(param_ball_msg)
+<<<<<<< HEAD
 			if cv2.waitKey(1)==ord('q'):
         			break
+=======
+>>>>>>> 32ffeead7f782714fc715b0f4ce9b66228786980
 	except rospy.ROSInterruptException:
 		return
 	except KeyboardInterrupt:
