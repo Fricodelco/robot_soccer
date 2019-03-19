@@ -1,13 +1,7 @@
 <launch> 
 
-<<<<<<< HEAD
-<node pkg="robot_vision" type="publisher_ball" name="ball_coordinates" respawn = true />
-<rosparam command="load" file="$(find robot_vision)/launch/CameraSETTing.yaml" />
-=======
 <node pkg="robot_vision" type="publisher_ball.py" name="ball_coordinates" output = "screen"/>
 <rosparam command="load" file="$(find robot_vision)/launch/CameraSETTing.yaml" />
 <node pkg="robot_goalkeeper" type="goalkeeper_node.py" name = "goalkeeper" output = "screen"/>
->>>>>>> 32ffeead7f782714fc715b0f4ce9b66228786980
 
 </launch>
-
