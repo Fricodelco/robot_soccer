@@ -62,6 +62,14 @@ def publish():
 				#cv2.drawContours(image_ball, contours, 0, (255, 0, 255), 3)
 
 				(x, y), radius = cv2.minEnclosingCircle(contours[0])
+				if (x > x_size):
+                                        x = x_size
+                                if (x < 0):
+                                        x = 0
+                                if (y > y_size):
+                                        y = y_size
+                                if (y < 0):
+                                        y = 0
 				center = (int(x), int(y))
 				radius = int(radius)
 				#cv2.circle(image_ball, center, radius, (0, 255, 0), 2)
@@ -71,7 +79,7 @@ def publish():
 				param_ball_msg.y_centre = y_offset - y
 				param_ball_msg.z_centre = radius
 				pub.publish(param_ball_msg)
-				print ("center x = " + str(x - x_offset) + " y = " + str(y_offset - y) + " radius= " + str(radius))
+			#	print ("center x = " + str(x - x_offset) + " y = " + str(y_offset - y) + " radius= " + str(radius))
 			else :
 				param_ball_msg.find_ball = False
 				pub.publish(param_ball_msg)

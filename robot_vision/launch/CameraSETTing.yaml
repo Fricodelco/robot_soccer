@@ -1,11 +1,11 @@
 CameraID: 0
-Bmax: 70
-Bmin: 30
+Bmax: 32
+Bmin: 0
 Gmax: 255
-Gmin: 102
+Gmin: 150
 Rmax: 255
-Rmin: 130
-Width_image: 480
-Height_image: 360
-Limit_close_distance: 100
-Limit_mid_distance: 500
+Rmin: 76
+Width_image: 240
+Height_image: 180
+
+ 
